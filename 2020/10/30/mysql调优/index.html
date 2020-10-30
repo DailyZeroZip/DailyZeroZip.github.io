@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -79,15 +79,27 @@
 
 
 
-<meta name="description" content="過好你自己...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Dbao子博客">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="Mysql性能调优什么决定了双11大促的成败 web服务器 ：可以横向拓展，只要有足够的服务器。就可以部署web服务，只要web的程序是一样的；  数据库服务器：数据库要求完成性和一致性，数据并不是随便的复制拓展；所以数据库服务器的优化比较有难度。   一般公司多数公司的数据库架构都是主从架构：一个主服务器多个从服务器；master—-&gt;n个slave   一旦主服务器发生故障，只能从sla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql调优">
+<meta property="og:url" content="http://example.com/2020/10/30/mysql%E8%B0%83%E4%BC%98/index.html">
 <meta property="og:site_name" content="Dbao子博客">
-<meta property="og:description" content="過好你自己...">
+<meta property="og:description" content="Mysql性能调优什么决定了双11大促的成败 web服务器 ：可以横向拓展，只要有足够的服务器。就可以部署web服务，只要web的程序是一样的；  数据库服务器：数据库要求完成性和一致性，数据并不是随便的复制拓展；所以数据库服务器的优化比较有难度。   一般公司多数公司的数据库架构都是主从架构：一个主服务器多个从服务器；master—-&gt;n个slave   一旦主服务器发生故障，只能从sla">
 <meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdn.net/20180511181017647?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RhX2d1b19saQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191011191035889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdteDE5OTMzMjg=,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdn.net/20181004102705475?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d5cXdpbGxpYW0=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20181004102938486?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d5cXdpbGxpYW0=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/2018100410311231?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3d5cXdpbGxpYW0=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20160805191715603">
+<meta property="og:image" content="https://img-blog.csdn.net/20160805192039968">
+<meta property="og:image" content="https://img-blog.csdn.net/20160805192156312">
+<meta property="article:published_time" content="2020-10-30T15:12:54.000Z">
+<meta property="article:modified_time" content="2020-10-30T15:14:09.615Z">
 <meta property="article:author" content="Dzh">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180511181017647?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2RhX2d1b19saQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 
 
 
@@ -117,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://example.com/"/>
+  <link rel="canonical" href="http://example.com/2020/10/30/mysql调优/"/>
 
 
 
 
 
-  <title>Dbao子博客</title>
+  <title>mysql调优 | Dbao子博客</title>
   
 
 
@@ -142,8 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -256,9 +267,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -288,9 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/30/mysql%E8%B0%83%E4%BC%98/" itemprop="url">mysql调优</a></h1>
+          <h1 class="post-title" itemprop="name headline">mysql调优</h1>
         
 
         <div class="post-meta">
@@ -340,9 +349,7 @@
       
 
       
-        
-          
-            <h1 id="Mysql性能调优"><a href="#Mysql性能调优" class="headerlink" title="Mysql性能调优"></a>Mysql性能调优</h1><h3 id="什么决定了双11大促的成败"><a href="#什么决定了双11大促的成败" class="headerlink" title="什么决定了双11大促的成败"></a>什么决定了双11大促的成败</h3><ul>
+        <h1 id="Mysql性能调优"><a href="#Mysql性能调优" class="headerlink" title="Mysql性能调优"></a>Mysql性能调优</h1><h3 id="什么决定了双11大促的成败"><a href="#什么决定了双11大促的成败" class="headerlink" title="什么决定了双11大促的成败"></a>什么决定了双11大促的成败</h3><ul>
 <li><p>web服务器 ：可以横向拓展，只要有足够的服务器。就可以部署web服务，只要web的程序是一样的；</p>
 </li>
 <li><p>数据库服务器：数据库要求完成性和一致性，数据并不是随便的复制拓展；所以数据库服务器的优化比较有难度。 </p>
@@ -1255,8 +1262,6 @@
 </li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -1271,498 +1276,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/21/HEXO-NEXT%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dbao子博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/21/HEXO-NEXT%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96/" itemprop="url">HEXO+NEXT界面美化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-21T20:07:41+08:00">
-                2020-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇文章用于记录我在建立个人博客过程中关于Hexo和Next主题用到的知识。<br>首先声明两个概念：</p>
-<ol>
-<li>站点配置文件———&gt;<code>博客目录/_config.yaml</code>;</li>
-<li>主题配置文件———&gt;<code>博客目录/themes/next/_config.yaml</code></li>
-</ol>
-<h2 id="基本hexo操作"><a href="#基本hexo操作" class="headerlink" title="基本hexo操作"></a>基本hexo操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
-
-<p>-用于清理hexo的缓存，建议生成进行操作之前都进行clean操作，<br>可以消除不必要的bug</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-
-
-<p>-用于根据已编辑的config或markdown生成html页面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-
-
-<p>-将生成的网页挂载在本地主机IP的4000端口上，可以在正式发布前检验<br>页面的内容和样式是否正确无误</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-
-<p>-将生成的网页deploy到设定好的位置，可以是gitpage<br>也可以是一个ip等等，取决于站点配置文件_config.yaml<br>文件里的配置</p>
-<h2 id="选择hexo主题"><a href="#选择hexo主题" class="headerlink" title="选择hexo主题"></a>选择hexo主题</h2><p>在主题配置文件中查找关键字<code>Schemes</code>,找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Schemes</span><br><span class="line">#scheme: Muse</span><br><span class="line">#scheme: Mist</span><br><span class="line">#scheme: Pisces</span><br><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
-
-
-<p>需要哪个主题就将对应行的注释去掉，并将其他的三种主题注释，这里我选择的是Gemini的主题</p>
-<h2 id="更改站点配置信息"><a href="#更改站点配置信息" class="headerlink" title="更改站点配置信息"></a>更改站点配置信息</h2><p>站点配置信息里可以修改的很多，包括站点的基本信息，一些拓展插件，deploy信息等等，这里只介绍第一个：</p>
-<h4 id="博客的基本信息："><a href="#博客的基本信息：" class="headerlink" title="博客的基本信息："></a>博客的基本信息：</h4><p>打开站点配置文件，映入眼帘的首先就是<code>Site</code>:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: Han&#39; s Blog</span><br><span class="line">subtitle: A student in SEIT of SYSU</span><br><span class="line">description: Just a simple programmer!</span><br><span class="line">keywords: GOGOGO</span><br><span class="line">author: Hans</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: Asia&#x2F;Shanghai</span><br></pre></td></tr></table></figure>
-
-
-<p>其中:</p>
-<ol>
-<li>title指整个博客的标题，而subtitle顾名思义就是博客标题下的小标题</li>
-<li>description会和author显示在一起，相当于作者的一个简略介绍</li>
-<li>keywords视主题而定，有些主题会显示而有些不会</li>
-<li>language：zh-CN指语言为中文简体，如果需要英文也可以改成en</li>
-</ol>
-<h2 id="创建页面"><a href="#创建页面" class="headerlink" title="创建页面"></a>创建页面</h2><p>在博客的主体中，除了有主页home，归档archive之外，其实还有许多的页面可供选择，其中包括：<br>标签tags页面、分类categories页面、个人信息about页面等等。三者的创建思路其实是一样的，首先在主题配置文件中搜索关键词<code>menu</code>:<br>可以得到以下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: &#x2F; || home</span><br><span class="line">  about: &#x2F;about&#x2F; || user</span><br><span class="line">  tags: &#x2F;tags&#x2F; || tags</span><br><span class="line">  categories: &#x2F;categories&#x2F; || th</span><br><span class="line">  archives: &#x2F;archives&#x2F; || archive</span><br><span class="line">  #schedule: &#x2F;schedule&#x2F; || calendar</span><br><span class="line">  #sitemap: &#x2F;sitemap.xml || sitemap</span><br><span class="line">  #commonweal: &#x2F;404&#x2F; || heartbeat</span><br></pre></td></tr></table></figure>
-
-
-<p>其中每一行分别代表着一个页面，将需要的页面的注释取消即可，<code>||</code>符号后的是该页面选项上对应的logo</p>
-<h4 id="标签tags页面"><a href="#标签tags页面" class="headerlink" title="标签tags页面"></a>标签tags页面</h4><p>使用命令行创建一个tags的页面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
-
-
-<p>然后打开<code>博客目录/source/tags/index.md</code>，编辑内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: All tags</span><br><span class="line">date: 2020-03-20 12:27:53</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-<p>重点在于<code>type: &quot;tags&quot;</code>这一段，这声明了该页面的一个属性，这个属性是特定的，在生成页面的时候会有对应的专用样式</p>
-<h4 id="分类categories页面"><a href="#分类categories页面" class="headerlink" title="分类categories页面"></a>分类categories页面</h4><p>同理：<br>使用命令行创建一个categories的页面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-
-
-<p>然后打开<code>博客目录/source/categories/index.md</code>，编辑内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2020-03-20 12:27:53</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-<p>重点在于<code>type: &quot;categories&quot;</code>这一段，这声明了该页面的一个属性，这个属性是特定的，在生成页面的时候会有对应的专用样式</p>
-<h4 id="个人信息about页面"><a href="#个人信息about页面" class="headerlink" title="个人信息about页面"></a>个人信息about页面</h4><p>使用命令行创建一个about的页面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page about</span><br></pre></td></tr></table></figure>
-
-
-<p>然后打开<code>博客目录/source/about/index.md</code>，编辑内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: title_which_you_want</span><br><span class="line">date: 2020-03-20 12:27:53</span><br><span class="line">type: &quot;about&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-<p>此处的<code>type: &quot;about&quot;</code>据我观察好像没什么作用，然后只要在该markdown下编辑自我介绍的内容即可、</p>
-<h2 id="夜间模式"><a href="#夜间模式" class="headerlink" title="夜间模式"></a>夜间模式</h2><p>这个夜间模式是新版的next才有的，具体哪一个版本我并没有仔细调查，开启黑夜模式并不困难。<br>首先打开主题配置文件，搜索关键字<code>darkmode</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Dark Mode</span><br><span class="line">darkmode: false</span><br></pre></td></tr></table></figure>
-
-
-<p>将false改为true即可</p>
-<h2 id="编辑博客中的社交软件链接"><a href="#编辑博客中的社交软件链接" class="headerlink" title="编辑博客中的社交软件链接"></a>编辑博客中的社交软件链接</h2><p>打开主题配置文件，搜索关键字<code>social</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">social:</span><br><span class="line">  GitHub: https:&#x2F;&#x2F;github.com&#x2F;chenlianhan || github</span><br><span class="line">  E-Mail: mailto:chenlh53@mail2.sysu.edu.cn || envelope</span><br><span class="line">  #Weibo: https:&#x2F;&#x2F;weibo.com&#x2F;yourname || weibo</span><br><span class="line">  #Google: https:&#x2F;&#x2F;plus.google.com&#x2F;yourname || google</span><br><span class="line">  #Twitter: https:&#x2F;&#x2F;twitter.com&#x2F;yourname || twitter</span><br><span class="line">  #FB Page: https:&#x2F;&#x2F;www.facebook.com&#x2F;yourname || facebook</span><br><span class="line">  #StackOverflow: https:&#x2F;&#x2F;stackoverflow.com&#x2F;yourname || stack-overflow</span><br><span class="line">  #YouTube: https:&#x2F;&#x2F;youtube.com&#x2F;yourname || youtube</span><br><span class="line">  #Instagram: https:&#x2F;&#x2F;instagram.com&#x2F;yourname || instagram</span><br><span class="line">  #Skype: skype:yourname?call|chat || skype</span><br><span class="line">  Bilibili: https:&#x2F;&#x2F;space.bilibili.com&#x2F;33035816 ||youtube</span><br></pre></td></tr></table></figure>
-
-
-<p>此处的语法类似于上文中的menu，将需要显示的去掉注销，不需要显示的注销即可。<br><code>||</code>后的是logo，这里也支持自定义，比如我加了一个bilibili的链接，但是由于官方的logo库<br>并没有bilibili的Logo，于是这里我采用了youtube的logo作为代替。</p>
-<h2 id="更改全局字体"><a href="#更改全局字体" class="headerlink" title="更改全局字体"></a>更改全局字体</h2><p>首先对于汉字来说，因为其字体库太大，通常都是调用本地中文字体库。<br>然而，不同设备有不同默认中文字体和中文字体库，想要尽可能在不同设备上有较好的显示效果，<br>就要在调用不同设备的本地字体库中显示效果较好的中文字体。</p>
-<p>注意：要想 NexT 主题的简体中文字体配置生效，站点配置文件中的 language 必须为 zh-CN。<br>然后对于英文字体，因为其字体库很小，所以想要个性化就简单多了。</p>
-<p>首先需要在google font上找到一款喜欢的字体，我这里使用的是思源宋体<code>Noto Serif SC</code>，<br>然后就是</p>
-<h4 id="启用字体自定义和全局字体族"><a href="#启用字体自定义和全局字体族" class="headerlink" title="启用字体自定义和全局字体族"></a>启用字体自定义和全局字体族</h4><p>打开主题配置文件，搜索关键字<code>font</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">font:</span><br><span class="line">  enable: true</span><br><span class="line"></span><br><span class="line">  # Uri of fonts host, e.g. https:&#x2F;&#x2F;fonts.googleapis.com (Default).</span><br><span class="line">  host: https:&#x2F;&#x2F;fonts.loli.net</span><br><span class="line"></span><br><span class="line">  # Font options:</span><br><span class="line">  # &#96;external: true&#96; will load this font family from &#96;host&#96; above.</span><br><span class="line">  # &#96;family: Times New Roman&#96;. Without any quotes.</span><br><span class="line">  # &#96;size: x.x&#96;. Use &#96;em&#96; as unit. Default: 1 (16px)</span><br><span class="line"></span><br><span class="line">  # Global font settings used for all elements inside &lt;body&gt;.</span><br><span class="line">  global:</span><br><span class="line">    external: true</span><br><span class="line">    family: Noto Serif SC</span><br><span class="line">    size:</span><br></pre></td></tr></table></figure>
-
-
-
-<ol>
-<li>将<code>enable</code>设为<code>true</code></li>
-<li><code>host:</code>输入<code>https://fonts.loli.net</code>，这是国内谷歌字体的镜像源</li>
-<li><code>global</code>下的<code>family</code>，输入你想要设定的字体类型名</li>
-</ol>
-<h4 id="配置全局中文字体"><a href="#配置全局中文字体" class="headerlink" title="配置全局中文字体"></a>配置全局中文字体</h4><p>打开文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">博客地址&#x2F;themes&#x2F;next&#x2F;source&#x2F;css&#x2F;_variables&#x2F;base.styl</span><br></pre></td></tr></table></figure>
-
-
-<p>找到<code>font-family-chinese</code>，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Font families.</span><br><span class="line">$font-family-chinese      &#x3D; &quot;Noto Serif SC&quot;;</span><br><span class="line"></span><br><span class="line">$font-family-base         &#x3D; $font-family-chinese, sans-serif;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-
-<p>将<code>font-family-chinese</code>设置为想要设定的字体类型名</p>
-<h4 id="引入字库"><a href="#引入字库" class="headerlink" title="引入字库"></a>引入字库</h4><p>在谷歌字体网站上，获取字体的<code>&lt;link&gt;</code>代码，并复制下来到</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">博客地址&#x2F;themes&#x2F;next&#x2F;layout&#x2F;_partials&#x2F;head&#x2F;external-fonts.swig</span><br><span class="line">没有就自建</span><br></pre></td></tr></table></figure>
-
-
-<p>并将<code>&lt;link&gt;</code>中的<code>googleapis.com</code>改为<code>loli.net</code>即可。</p>
-<h2 id="动态背景canvas-nest"><a href="#动态背景canvas-nest" class="headerlink" title="动态背景canvas_nest"></a>动态背景canvas_nest</h2><p>首先创建文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">博客目录&#x2F;source&#x2F;_data&#x2F;footer.swig（没有就创建）</span><br></pre></td></tr></table></figure>
-
-
-<p>文件的内容为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script color&#x3D;&quot;0,0,255&quot; opacity&#x3D;&quot;0.5&quot; zIndex&#x3D;&quot;-1&quot; count&#x3D;&quot;99&quot; src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;canvas-nest.js@1&#x2F;dist&#x2F;canvas-nest.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-
-
-<p>打开主题配置文件，搜索关键字<code>custom_file_path</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">custom_file_path:</span><br><span class="line">  #head: source&#x2F;_data&#x2F;head.swig</span><br><span class="line">  #header: source&#x2F;_data&#x2F;header.swig</span><br><span class="line">  #sidebar: source&#x2F;_data&#x2F;sidebar.swig</span><br><span class="line">  #postMeta: source&#x2F;_data&#x2F;post-meta.swig</span><br><span class="line">  #postBodyEnd: source&#x2F;_data&#x2F;post-body-end.swig</span><br><span class="line">  footer: source&#x2F;_data&#x2F;footer.swig</span><br><span class="line">  #bodyEnd: source&#x2F;_data&#x2F;body-end.swig</span><br><span class="line">  #variable: source&#x2F;_data&#x2F;variables.styl</span><br><span class="line">  #mixin: source&#x2F;_data&#x2F;mixins.styl</span><br><span class="line">  #style: source&#x2F;_data&#x2F;styles.styl</span><br></pre></td></tr></table></figure>
-
-
-<p>将footer对应行取消注释，此时引入了我们的自定义的动态背景脚本</p>
-<h2 id="文章置顶"><a href="#文章置顶" class="headerlink" title="文章置顶"></a>文章置顶</h2><p>首先移除默认的排序插件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br></pre></td></tr></table></figure>
-
-
-
-<p>然后安装新的排序插件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure>
-
-
-<p>在编辑需要指定的文章时，在文章标题栏加入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sticky: true&#x2F;数字</span><br></pre></td></tr></table></figure>
-
-
-<p>不同文章的数字可以不同，这样就可以按数字的大小来作为置顶的先后顺序。</p>
-<p>在此的基础上，还可以利用原先置顶的样式，编辑文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">博客地址&#x2F;node_modules&#x2F;hexo-generator-index-pin-top&#x2F;lib&#x2F;generator.js</span><br></pre></td></tr></table></figure>
-
-
-<p>找到代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#39;use strict&#39;;</span><br><span class="line">var pagination &#x3D; require(&#39;hexo-pagination&#39;);</span><br><span class="line">module.exports &#x3D; function(locals)&#123;</span><br><span class="line">  var config &#x3D; this.config;</span><br><span class="line">  var posts &#x3D; locals.posts;</span><br><span class="line">    posts.data &#x3D; posts.data.sort(function(a, b) &#123;</span><br><span class="line">        if(a.sticky &amp;&amp; b.sticky) &#123; &#x2F;&#x2F; 两篇文章sticky都有定义</span><br><span class="line">            if(a.sticky &#x3D;&#x3D; b.sticky) return b.date - a.date; &#x2F;&#x2F; 若sticky值一样则按照文章日期降序排</span><br><span class="line">            else return b.sticky - a.sticky; &#x2F;&#x2F; 否则按照sticky值降序排</span><br><span class="line">        &#125;</span><br><span class="line">        else if(a.sticky &amp;&amp; !b.sticky) &#123; &#x2F;&#x2F; 以下是只有一篇文章sticky有定义，那么将有sticky的排在前面（这里用异或操作居然不行233）</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        else if(!a.sticky &amp;&amp; b.sticky) &#123;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        else return b.date - a.date; &#x2F;&#x2F; 都没定义按照文章日期降序排</span><br><span class="line">    &#125;);</span><br><span class="line">  var paginationDir &#x3D; config.pagination_dir || &#39;page&#39;;</span><br><span class="line">  return pagination(&#39;&#39;, posts, &#123;</span><br><span class="line">    perPage: config.index_generator.per_page,</span><br><span class="line">    layout: [&#39;index&#39;, &#39;archive&#39;],</span><br><span class="line">    format: paginationDir + &#39;&#x2F;%d&#x2F;&#39;,</span><br><span class="line">    data: &#123;</span><br><span class="line">      __index: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<p>即将原先文件中的<code>top</code>全部替换为<code>sticky</code>即可</p>
-<h2 id="代码块高亮"><a href="#代码块高亮" class="headerlink" title="代码块高亮"></a>代码块高亮</h2><p>在站点配置文件中搜索<code>highlight</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">highlight:</span><br><span class="line">  enable: true</span><br><span class="line">  line_number: true</span><br><span class="line">  auto_detect: true</span><br><span class="line">  tab_replace:</span><br></pre></td></tr></table></figure>
-
-
-<p>将<code>auto_detect</code>设为true启用</p>
-<p>然后在主题配置文件中搜索<code>highlight_theme</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">  # Code Highlight theme</span><br><span class="line">  # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic</span><br><span class="line">  # See: https:&#x2F;&#x2F;github.com&#x2F;chriskempson&#x2F;tomorrow-theme</span><br><span class="line">  highlight_theme: normal</span><br></pre></td></tr></table></figure>
-
-
-
-<p>其中<code>normal</code>可以改为其他的类型，具体看个人审美了</p>
-<h2 id="阅读进度"><a href="#阅读进度" class="headerlink" title="阅读进度"></a>阅读进度</h2><p>在主题配置文件中搜索<code>reading_progress</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Reading progress bar</span><br><span class="line">reading_progress:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
-
-
-<p>将<code>enable</code>设为true来启用</p>
-<h2 id="书签"><a href="#书签" class="headerlink" title="书签"></a>书签</h2><p>在主题配置文件中搜索<code>bookmark</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Bookmark Support</span><br><span class="line">bookmark:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
-
-
-<p>将<code>enable</code>设为true来启用</p>
-<h2 id="备案信息"><a href="#备案信息" class="headerlink" title="备案信息"></a>备案信息</h2><p>在主题配置文件中搜索<code>beian</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Beian ICP and gongan information for Chinese users. See: http:&#x2F;&#x2F;www.beian.miit.gov.cn, http:&#x2F;&#x2F;www.beian.gov.cn</span><br><span class="line">  beian:</span><br><span class="line">    enable: true</span><br><span class="line">    icp: </span><br><span class="line">    # The digit in the num of gongan beian.</span><br><span class="line">    gongan_id:</span><br><span class="line">    # The full num of gongan beian.</span><br><span class="line">    gongan_num:</span><br><span class="line">    # The icon for gongan beian. See: http:&#x2F;&#x2F;www.beian.gov.cn&#x2F;portal&#x2F;download</span><br><span class="line">    gongan_icon_url:</span><br></pre></td></tr></table></figure>
-
-
-
-<ol>
-<li>首先启用<code>enable</code>；</li>
-<li>在<code>icp</code>一栏中填入在工信部备案的备案号</li>
-<li>在<code>gongan_id</code>中填入在公安部备案的备案局名，一般为京或者其他的省份简称</li>
-<li>在<code>gongan_num</code>中填入完整的公安部备案号</li>
-<li>在<code>gongan_icon_url</code>中填入公安部备案完成后提供的备案logo的url链接</li>
-</ol>
-<h2 id="页脚hexo和主题信息"><a href="#页脚hexo和主题信息" class="headerlink" title="页脚hexo和主题信息"></a>页脚hexo和主题信息</h2><p>在主题配置文件中搜索<code>powered</code>和<code>theme</code>，分别找到两个代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">powered:</span><br><span class="line">    # Hexo link (Powered by Hexo).</span><br><span class="line">    enable: false</span><br><span class="line">    # Version info of Hexo after Hexo link (vX.X.X).</span><br><span class="line">    version: true</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">theme:</span><br><span class="line">    # Theme &amp; scheme info link (Theme - NexT.scheme).</span><br><span class="line">    enable: false</span><br><span class="line">    # Version info of NexT after scheme info (vX.X.X).</span><br><span class="line">    version: true</span><br></pre></td></tr></table></figure>
-
-<p>通过<code>enable</code>来控制是否在页脚显示hexo和主题信息</p>
-<h2 id="发布字数统计"><a href="#发布字数统计" class="headerlink" title="发布字数统计"></a>发布字数统计</h2><p>在NexT6.x！！！！！版本中，使用插件<code>hexo-symbols-count-time</code>，步骤如下：</p>
-<h4 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h4><p>使用命令行安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-symbols-count-time</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="站点配置"><a href="#站点配置" class="headerlink" title="站点配置"></a>站点配置</h4><p>在站点配置文件的末尾加上：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># hexo-symbols-count-time</span><br><span class="line">symbols_count_time:</span><br><span class="line">    symbols: true</span><br><span class="line">    time: true</span><br><span class="line">    total_symbols: true</span><br><span class="line">    total_time: true</span><br></pre></td></tr></table></figure>
-
-
-<p>从上到下分别代表：</p>
-<ol>
-<li>symbols：文章中的词数</li>
-<li>time：文章的预计阅读时间</li>
-<li>total_symbols：全部文章的词数</li>
-<li>total_time：全部文章的预计阅读时间</li>
-</ol>
-<h4 id="NexT配置"><a href="#NexT配置" class="headerlink" title="NexT配置"></a>NexT配置</h4><p>在主题配置文件中可以对该插件进行进一步的修饰，搜索<code>symbols_count_time</code>，找到如下代码段：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Post wordcount display settings</span><br><span class="line"># Dependencies: https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-symbols-count-time</span><br><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: true</span><br><span class="line">  item_text_post: true</span><br><span class="line">  item_text_total: false</span><br></pre></td></tr></table></figure>
-
-
-<p>可以看到有三个变量，分别是：</p>
-<ol>
-<li><code>seperated_meta</code>：分隔符，可以将词数和阅读时间隔开</li>
-<li><code>item_text_post</code>：是否在摘要页显示字数和阅读时间</li>
-<li><code>item_text_total</code>：是否在页脚显示字数和阅读时间</li>
-</ol>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ol>
-<li><a target="_blank" rel="noopener" href="https://io-oi.me/tech/hexo-next-optimization/">https://io-oi.me/tech/hexo-next-optimization/</a></li>
-<li><a target="_blank" rel="noopener" href="https://theme-next.iissnan.com/getting-started.html">https://theme-next.iissnan.com/getting-started</a></li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/21/github/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dbao子博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/21/github/" itemprop="url">github</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-21T19:33:29+08:00">
-                2020-10-21
-              </time>
+              <a href="/2020/10/21/HEXO-NEXT%E7%95%8C%E9%9D%A2%E7%BE%8E%E5%8C%96/" rel="next" title="HEXO+NEXT界面美化">
+                <i class="fa fa-chevron-left"></i> HEXO+NEXT界面美化
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>1.在github上创建（sign up）账号，<a target="_blank" rel="noopener" href="https://github.com/join%E3%80%82%E5%A1%AB%E5%86%99%E9%82%AE%E7%AE%B1%EF%BC%8C%E8%B4%A6%E5%8F%B7%EF%BC%8C%E9%AA%8C%E8%AF%81">https://github.com/join。填写邮箱，账号，验证</a>…..</p>
-<p>2.下载git安装。<a target="_blank" rel="noopener" href="https://gitforwindows.org/">https://gitforwindows.org/</a></p>
-<p>3.任何界面鼠标右键，选择git bash here。</p>
-<p>4.配置全局账号和密码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;name&quot;</span><br><span class="line">git config --global user.email &quot;xxx@qq.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p>5.生成秘钥ssh-keygen -t rsa -C “你的公司或个人邮箱”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;xxx@qq.com&quot;</span><br></pre></td></tr></table></figure>
-
-<p>执行命令，会弹出设置秘钥等，不想设置，直接enter</p>
-<p>6.查看生成秘钥位置</p>
-<p>7.去上述目录下可以看到。</p>
-<p>使用id_rsa.pub公鑰，id_rsa是私鑰</p>
-<p>8.打开公钥，复制粘贴到Github网站上的ssh_key上。</p>
-<p>9.后续执行git clone github上的项目的sshkey地址，根据提示输入密码等，就可以下载项目。</p>
-<hr>
-<p>去github </p>
-<p><strong>1.创建仓库</strong></p>
-<p>1.1 创建仓库</p>
-<p><img src="https://img-blog.csdnimg.cn/20201019114720473.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhY2hpX3J0,size_16,color_FFFFFF,t_70" alt="img"></p>
-<p><img src="https://img-blog.csdnimg.cn/20201019114826216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hhY2hpX3J0,size_16,color_FFFFFF,t_70" alt="img"></p>
-<p>1.2 创建仓库后，点击clone，复制git地址</p>
-<p><strong>2.本地代码上传到github</strong></p>
-<p>2.1 在本地的项目工程目录下，安装shift，鼠标右键，git bash here，然后依次执行命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.git init       &#x2F;&#x2F;工作空间创建.git文件夹（默认隐藏了该文件夹）</span><br><span class="line"></span><br><span class="line">2.git add .      &#x2F;&#x2F;添加到暂存区</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">3.git commit -m &quot;注释&quot;</span><br><span class="line"></span><br><span class="line">4.git remote add origin http:&#x2F;&#x2F;xxxxxxxxx.git   &#x2F;&#x2F;本地仓库和远程github关联</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">5.git pull --rebase origin master  &#x2F;&#x2F;远程有readme.md，拉一下</span><br><span class="line"></span><br><span class="line">6.git push -u origin master        &#x2F;&#x2F;代码合并</span><br></pre></td></tr></table></figure>
-
-<p>2.2 在2020年10月1起，github默认主分支从master更名为main，以上提交方式会默认创建一个master分支，为保持一致性，可将本地git init的时候默认分支修改为main，执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git --version    查看版本</span><br><span class="line"></span><br><span class="line">git config --global init.defaultBranch main   git在2.28.0上，重新设置git默认分支为main</span><br></pre></td></tr></table></figure>
-
-<p>2.3 如果=一不小心，创建了mster分支，强迫症，可以执行下面命令删除分支。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">删除本地分支：git branch -d 分支名称</span><br><span class="line"></span><br><span class="line">强制删除本地分支：git branch -D 分支名称</span><br><span class="line"></span><br><span class="line">删除远程分支：git push origin --delete 分支名称</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1772,466 +1315,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/21/hexo%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dbao子博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/21/hexo%E4%BD%BF%E7%94%A8/" itemprop="url">“hexo使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-21T16:10:22+08:00">
-                2020-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="写新的文章"><a href="#写新的文章" class="headerlink" title="写新的文章"></a>写新的文章</h1><p>hexo new “new article”</p>
-<p>打开之后我们会看到：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">title: new article</span><br><span class="line">date: 2014-11-01 20:10:33</span><br><span class="line">tags:</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>文件的开头是属性，采用统一的yaml格式，用三条短横线分隔。下面是文章正文。<br>文章的正文支持markdown格式，<br>新建、删除或修改文章后，不需要重启hexo server，刷新一下即可预览。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/21/mybatis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dbao子博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/21/mybatis/" itemprop="url">mybatis</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-21T16:03:50+08:00">
-                2020-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h1><h2 id="什么是mybatis"><a href="#什么是mybatis" class="headerlink" title="什么是mybatis"></a>什么是mybatis</h2><p>MyBatis 是一款优秀的<strong>持久层框架</strong></p>
-<p>MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集的过程</p>
-<p>MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 实体类 【Plain</p>
-<p>Old Java Objects,普通的 Java对象】映射成数据库中的记录。</p>
-<p>MyBatis 本是apache的一个开源项目ibatis, 2010年这个项目由apache 迁移到了google code，并</p>
-<p>且改名为MyBatis 。</p>
-<p>2013年11月迁移到<strong>Github</strong> .</p>
-<p>Mybatis官方文档 : <a target="_blank" rel="noopener" href="http://www.mybatis.org/mybatis-3/zh/index.html">http://www.mybatis.org/mybatis-3/zh/index.html</a></p>
-<p>GitHub : <a target="_blank" rel="noopener" href="https://github.com/mybatis/mybatis-3">https://github.com/mybatis/mybatis-3</a></p>
-<h2 id="持久层"><a href="#持久层" class="headerlink" title="持久层"></a>持久层</h2><p><strong>持久化是将程序数据在持久状态和瞬时状态间转换的机制。</strong></p>
-<p>  即把数据（如内存中的对象）保存到可永久保存的存储设备中（如磁盘）。持久化的主要应用</p>
-<p>是将内存中的对象存储在数据库中，或者存储在磁盘文件中、XML数据文件中等等。</p>
-<p>JDBC就是一种持久化机制。文件IO也是一种持久化机制。</p>
-<p>在生活中 : 将鲜肉冷藏，吃的时候再解冻的方法也是。将水果做成罐头的方法也是。</p>
-<p><strong>为什么需要持久化服务呢？那是由于内存本身的缺陷引起的</strong></p>
-<p>  内存断电后数据会丢失，但有一些对象是无论如何都不能丢失的，比如银行账号等，遗憾的</p>
-<p>是，人们还无法保证内存永不掉电。</p>
-<p>内存过于昂贵，与硬盘、光盘等外存相比，内存的价格要高2~3个数量级，而且维持成本也</p>
-<p>高，至少需要一直供电吧。所以即使对象不需要永久保存，也会因为内存的容量限制不能一直</p>
-<p>呆在内存中，需要持久化来缓存到外存。</p>
-<h2 id="持久层-1"><a href="#持久层-1" class="headerlink" title="持久层"></a>持久层</h2><p>什么是持久层？</p>
-<p>完成持久化工作的代码块 . —-&gt; dao层 【DAO (Data Access Object) 数据访问对象】</p>
-<p>大多数情况下特别是企业级应用，数据持久化往往也就意味着将内存中的数据保存到磁盘上加</p>
-<p>以固化，而持久化的实现过程则大多通过各种<strong>关系数据库</strong>来完成。</p>
-<p>不过这里有一个字需要特别强调，也就是所谓的“层”。对于应用系统而言，数据持久功能大多</p>
-<p>是必不可少的组成部分。也就是说，我们的系统中，已经天然的具备了“持久层”概念？也许</p>
-<p>是，但也许实际情况并非如此。之所以要独立出一个“持久层”的概念,而不是“持久模块”，“持久</p>
-<p>单元”，也就意味着，我们的系统架构中，应该有一个相对独立的逻辑层面，专著于数据持久</p>
-<p>化逻辑的实现.</p>
-<p>与系统其他部分相对而言，这个层面应该具有一个较为清晰和严格的逻辑边界。 【说白了就</p>
-<p>是用来操作数据库存在的！】</p>
-<h2 id="为什么要使用Mybatis"><a href="#为什么要使用Mybatis" class="headerlink" title="为什么要使用Mybatis"></a>为什么要使用Mybatis</h2><p>Mybatis就是帮助程序猿将数据存入数据库中 , 和从数据库中取数据 .</p>
-<p>传统的jdbc操作 , 有很多重复代码块 .比如 : 数据取出时的封装 , 数据库的建立连接等等… , 通过框</p>
-<p>架可以减少重复代码,提高开发效率 .</p>
-<p>MyBatis 是一个半自动化的<strong>ORM**</strong>框架** <strong>(Object Relationship Mapping) –&gt;**</strong>对象关系映射**</p>
-<p>所有的事情，不用Mybatis依旧可以做到，只是用了它，所有实现会更加简单！<strong>技术没有高低之</strong></p>
-<p><strong>分，只有使用这个技术的人有高低之别</strong></p>
-<p>MyBatis的优点</p>
-<p>简单易学：本身就很小且简单。没有任何第三方依赖，最简单安装只要两个jar文件+配置几个</p>
-<p>sql映射文件就可以了，易于学习，易于使用，通过文档和源代码，可以比较完全的掌握它的</p>
-<p>设计思路和实现。</p>
-<p>灵活：mybatis不会对应用程序或者数据库的现有设计强加任何影响。 sql写在xml里，便于统</p>
-<p>一管理和优化。通过sql语句可以满足操作数据库的所有需求。</p>
-<p>解除sql与程序代码的耦合：通过提供DAO层，将业务逻辑和数据访问逻辑分离，使系统的设</p>
-<p>计更清晰，更易维护，更易单元测试。sql和代码的分离，提高了可维护性。</p>
-<p>提供xml标签，支持编写动态sql。</p>
-<p>…….</p>
-<p>最重要的一点，使用的人多！公司需要！</p>
-<h2 id="MyBatis-第一个程序"><a href="#MyBatis-第一个程序" class="headerlink" title="MyBatis**第一个程序**"></a><strong>MyBatis**</strong>第一个程序**</h2><p>思路流程：搭建环境–&gt;导入Mybatis—&gt;编写代码&gt;*测试</p>
-<ul>
-<li>步骤</li>
-</ul>
-<h3 id="1-数据库"><a href="#1-数据库" class="headerlink" title="1.数据库"></a>1.数据库</h3><ul>
-<li><pre><code class="sql">CREATE DATABASE `mybatis`; USE `mybatis`; DROP TABLE IF EXISTS `user`; CREATE TABLE `user` ( `id` int(20) NOT NULL,`name` varchar(30) DEFAULT NULL, `pwd` varchar(30) DEFAULT NULL, PRIMARY KEY (`id`) ) ENGINE=InnoDB DEFAULT CHARSET=utf8; insert into `user`(`id`,`name`,`pwd`) values (1,&#39;dzh&#39;,&#39;123456&#39;),(2,&#39;张 三&#39;,&#39;abcdef&#39;),(3,&#39;李四&#39;,&#39;987654&#39;);
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">###  2.导入MyBatis相关 jar 包</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;xml</span><br><span class="line">&lt;dependency&gt; </span><br><span class="line">    &lt;groupId&gt;org.mybatis&lt;&#x2F;groupId&gt; </span><br><span class="line">    &lt;artifactId&gt;mybatis&lt;&#x2F;artifactId&gt; </span><br><span class="line">    &lt;version&gt;3.5.2&lt;&#x2F;version&gt; </span><br><span class="line">&lt;&#x2F;dependency&gt; </span><br><span class="line">&lt;dependency&gt; </span><br><span class="line">    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt; </span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt; </span><br><span class="line">    &lt;version&gt;5.1.47&lt;&#x2F;version&gt; </span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
-</ul>
-<h3 id="3-编写MyBatis核心配置文件"><a href="#3-编写MyBatis核心配置文件" class="headerlink" title="3.编写MyBatis核心配置文件"></a>3.编写MyBatis核心配置文件</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span> <span class="meta">&lt;!DOCTYPE <span class="meta-keyword">configuration</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;development&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span></span></span><br><span class="line"><span class="tag">                          <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/mybatis? useSSL=true<span class="symbol">&amp;amp;</span>useUnicode=true<span class="symbol">&amp;amp;</span>characterEncoding=utf8&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;123456&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;com/dzh/dao/userMapper.xml&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="4-编写MyBatis工具类"><a href="#4-编写MyBatis工具类" class="headerlink" title="4.编写MyBatis工具类"></a>4.编写MyBatis工具类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSession;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisUtils</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> SqlSessionFactory sqlSessionFactory;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            String resource = <span class="string">&quot;mybatis-config.xml&quot;</span>;</span><br><span class="line">            InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">            sqlSessionFactory = <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="comment">//获取SqlSession连接 public static SqlSession getSession()&#123; return sqlSessionFactory.openSession(); &#125; &#125;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="5-创建实体类"><a href="#5-创建实体类" class="headerlink" title="5.创建实体类"></a>5.创建实体类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123; </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> id; <span class="comment">//id private </span></span><br><span class="line">    String name; <span class="comment">//姓名 </span></span><br><span class="line">    <span class="keyword">private</span> String pwd; <span class="comment">//密码 </span></span><br><span class="line">    <span class="comment">//构造,有参,无参 </span></span><br><span class="line">    <span class="comment">//set/get </span></span><br><span class="line">    <span class="comment">//toString() </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="6-编写Mapper接口类"><a href="#6-编写Mapper接口类" class="headerlink" title="6.编写Mapper接口类"></a>6.编写Mapper接口类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import com.dzh.pojo.User;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public interface UserMapper &#123;</span><br><span class="line">    List&lt;User&gt; selectUser();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="7-编写Mapper-xml配置文件"><a href="#7-编写Mapper-xml配置文件" class="headerlink" title="7.编写Mapper.xml配置文件"></a>7.编写Mapper.xml配置文件</h3><ul>
-<li>namespace 十分重要，不能写错！</li>
-</ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span> <span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="meta-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.kuang.dao.UserMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;selectUser&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.dzh.pojo.User&quot;</span>&gt;</span> select * from user <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="8-编写测试类"><a href="#8-编写测试类" class="headerlink" title="8.编写测试类"></a>8.编写测试类</h3><ul>
-<li>Junit 包测试</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123; <span class="meta">@Test</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">selectUser</span><span class="params">()</span> </span>&#123; </span><br><span class="line">    SqlSession session = MybatisUtils.getSession(); </span><br><span class="line">     <span class="comment">//方法一: </span></span><br><span class="line">    <span class="comment">//List&lt;User&gt; users = session.selectList(&quot;com.kuang.mapper.UserMapper.selectUser&quot;); </span></span><br><span class="line">    <span class="comment">//方法二: </span></span><br><span class="line">    UserMapper mapper = session.getMapper(UserMapper.class);</span><br><span class="line">    List&lt;User&gt; users = mapper.selectUser(); </span><br><span class="line">    <span class="keyword">for</span> (User user: users)&#123; </span><br><span class="line">        System.out.println(user); </span><br><span class="line">    &#125;</span><br><span class="line">    session.close(); </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="问题说明"><a href="#问题说明" class="headerlink" title="问题说明"></a>问题说明</h3><p>可能出现问题说明：Maven静态资源过滤问题</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.properties<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>false<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.properties<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>false<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/21/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dbao子博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/21/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-21T14:14:03+08:00">
-                2020-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -2239,6 +1327,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -2259,8 +1351,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -2321,6 +1422,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98"><span class="nav-number">1.</span> <span class="nav-text">Mysql性能调优</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E5%86%B3%E5%AE%9A%E4%BA%86%E5%8F%8C11%E5%A4%A7%E4%BF%83%E7%9A%84%E6%88%90%E8%B4%A5"><span class="nav-number">1.0.1.</span> <span class="nav-text">什么决定了双11大促的成败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%B1%E5%93%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9B%A0%E7%B4%A0"><span class="nav-number">1.0.2.</span> <span class="nav-text">影响数据库的因素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sql%E6%9F%A5%E8%AF%A2%E9%80%9F%E5%BA%A6"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">sql查询速度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E5%8D%A1%E6%B5%81%E9%87%8F"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">网卡流量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A1%AC%E4%BB%B6"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">服务器硬件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A3%81%E7%9B%98io"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">磁盘io</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E8%BF%98%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%95%B0%E6%8D%AE%E5%BA%93%E6%80%A7%E8%83%BD"><span class="nav-number">1.0.2.5.</span> <span class="nav-text">其他还会影响数据库性能</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%A7%E8%A1%A8%E7%BB%99%E6%88%91%E4%BB%AC%E5%B8%A6%E6%9D%A5%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.0.2.5.1.</span> <span class="nav-text">大表给我们带来的问题：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%A7%E4%BA%8B%E5%8A%A1%E7%BB%99%E6%88%91%E4%BB%AC%E5%B8%A6%E6%9D%A5%E7%9A%84%E5%BD%B1%E5%93%8D%EF%BC%9A"><span class="nav-number">1.0.2.5.2.</span> <span class="nav-text">大事务给我们带来的影响：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E5%BD%B1%E5%93%8D%E4%BA%86%E6%80%A7%E8%83%BD"><span class="nav-number">1.0.3.</span> <span class="nav-text">什么影响了性能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A1%AC%E4%BB%B6-1"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">服务器硬件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">服务器操作系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E%E7%9A%84%E9%80%89%E6%8B%A9"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">数据库存储引擎的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">数据库参数配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%E5%92%8Csql%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.0.3.5.</span> <span class="nav-text">数据库结构设计和sql语句</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mysql"><span class="nav-number">1.0.4.</span> <span class="nav-text">Mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#MyISAM"><span class="nav-number">1.0.4.1.1.</span> <span class="nav-text">MyISAM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Innodb"><span class="nav-number">1.0.4.1.2.</span> <span class="nav-text">Innodb</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8EInnoDB%E4%B8%8EMyisam%E7%9A%84%E5%85%AD%E5%A4%A7%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">MySQL存储引擎InnoDB与Myisam的六大区别：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">性能优化顺序</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%89%E8%8C%83%E5%BC%8F%EF%BC%9A"><span class="nav-number">1.1.1.0.0.1.</span> <span class="nav-text">一般数据库三范式：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.1.1.0.0.2.</span> <span class="nav-text">物理设计</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%82%E7%94%A8%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">1.1.2.</span> <span class="nav-text">适用的场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#varchar%E5%92%8Cchar%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.3.</span> <span class="nav-text">varchar和char的优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL%E5%9F%BA%E5%87%86%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.4.</span> <span class="nav-text">MySQL基准测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E6%9B%B4%E6%96%B0"><span class="nav-number">1.1.5.</span> <span class="nav-text">后续更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">1.1.6.</span> <span class="nav-text">索引</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-%E6%A0%91"><span class="nav-number">2.</span> <span class="nav-text">B-树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91%E6%98%AF%E4%B8%80%E7%A7%8D%E5%A4%9A%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%88%E5%B9%B6%E4%B8%8D%E4%B8%80%E5%AE%9A%E6%98%AF%E4%BA%8C%E5%8F%89%E7%9A%84%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">B-树是一种多路搜索树（并不一定是二叉的）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E6%A3%B5m%E9%98%B6B%E6%A0%91-balanced-tree-of-order-m-%E6%98%AF%E4%B8%80%E6%A3%B5%E5%B9%B3%E8%A1%A1%E7%9A%84m%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91%E3%80%82%E5%AE%83%E6%88%96%E8%80%85%E6%98%AF%E7%A9%BA%E6%A0%91%EF%BC%8C%E6%88%96%E8%80%85%E6%98%AF%E6%BB%A1%E8%B6%B3%E4%B8%8B%E5%88%97%E6%80%A7%E8%B4%A8%E7%9A%84%E6%A0%91%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">一棵m阶B树(balanced tree of order m)是一棵平衡的m路搜索树。它或者是空树，或者是满足下列性质的树：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="nav-number">3.</span> <span class="nav-text">特点：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%EF%BC%9A%EF%BC%88M-3%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">如：（M&#x3D;3）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-%E6%A0%91%E7%9A%84%E7%89%B9%E6%80%A7%EF%BC%9A"><span class="nav-number">4.</span> <span class="nav-text">B-树的特性：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-%E6%A0%91-1"><span class="nav-number">5.</span> <span class="nav-text">B+树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E9%80%94%EF%BC%9A"><span class="nav-number">6.</span> <span class="nav-text">用途：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-%E6%A0%91%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">7.</span> <span class="nav-text">B+树的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91%E6%98%AF%E5%BA%94%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%89%80%E9%9C%80%E8%80%8C%E5%87%BA%E7%9A%84%E4%B8%80%E7%A7%8DB-%E6%A0%91%E7%9A%84%E5%8F%98%E5%9E%8B%E6%A0%91%E3%80%82%E4%B8%80%E6%A3%B5m%E9%98%B6%E7%9A%84B-%E6%A0%91%E5%92%8Cm%E9%98%B6%E7%9A%84B-%E6%A0%91%E7%9A%84%E5%B7%AE%E5%BC%82%E5%9C%A8%E4%BA%8E%EF%BC%9A"><span class="nav-number">7.1.</span> <span class="nav-text">B+树是应文件系统所需而出的一种B-树的变型树。一棵m阶的B+树和m阶的B-树的差异在于：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91%E6%98%AFB-%E6%A0%91%E7%9A%84%E5%8F%98%E4%BD%93%EF%BC%8C%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E5%A4%9A%E8%B7%AF%E6%90%9C%E7%B4%A2%E6%A0%91%EF%BC%9A"><span class="nav-number">7.2.</span> <span class="nav-text">B+树是B-树的变体，也是一种多路搜索树：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%EF%BC%9A%EF%BC%88M-3%EF%BC%89-1"><span class="nav-number">7.3.</span> <span class="nav-text">如：（M&#x3D;3）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-%E7%9A%84%E7%89%B9%E6%80%A7%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">B+的特性：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-%E6%A0%91%EF%BC%9A"><span class="nav-number">9.</span> <span class="nav-text">B*树：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%AFB-%E6%A0%91%E7%9A%84%E5%8F%98%E4%BD%93%EF%BC%8C%E5%9C%A8B-%E6%A0%91%E7%9A%84%E9%9D%9E%E6%A0%B9%E5%92%8C%E9%9D%9E%E5%8F%B6%E5%AD%90%E7%BB%93%E7%82%B9%E5%86%8D%E5%A2%9E%E5%8A%A0%E6%8C%87%E5%90%91%E5%85%84%E5%BC%9F%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%9B"><span class="nav-number">9.1.</span> <span class="nav-text">是B+树的变体，在B+树的非根和非叶子结点再增加指向兄弟的指针；</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91%E5%AE%9A%E4%B9%89%E4%BA%86%E9%9D%9E%E5%8F%B6%E5%AD%90%E7%BB%93%E7%82%B9%E5%85%B3%E9%94%AE%E5%AD%97%E4%B8%AA%E6%95%B0%E8%87%B3%E5%B0%91%E4%B8%BA-2-3-M%EF%BC%8C%E5%8D%B3%E5%9D%97%E7%9A%84%E6%9C%80%E4%BD%8E%E4%BD%BF%E7%94%A8%E7%8E%87%E4%B8%BA2-3"><span class="nav-number">9.2.</span> <span class="nav-text">B*树定义了非叶子结点关键字个数至少为(2&#x2F;3)*M，即块的最低使用率为2&#x2F;3</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="nav-number">10.</span> <span class="nav-text">小结：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91%EF%BC%9A-1"><span class="nav-number">10.1.</span> <span class="nav-text">B-树：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91%EF%BC%9A-2"><span class="nav-number">10.2.</span> <span class="nav-text">B+树：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#B-%E6%A0%91%EF%BC%9A-3"><span class="nav-number">10.3.</span> <span class="nav-text">B*树：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E7%B4%A2%E5%BC%95"><span class="nav-number">10.3.0.0.1.</span> <span class="nav-text">为什么要使用索引</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96"><span class="nav-number">10.3.1.</span> <span class="nav-text">sql查询优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%85%A2"><span class="nav-number">10.3.2.</span> <span class="nav-text">查询为什么会慢</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%AE%9Asql%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96"><span class="nav-number">10.3.2.1.</span> <span class="nav-text">特定sql查询优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8"><span class="nav-number">10.3.3.</span> <span class="nav-text">数据库分库分表</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -2461,6 +1578,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
